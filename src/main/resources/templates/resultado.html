@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!-- Resumen de una solicitud válida: no se guarda, solo existe en esta petición -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resumen de la solicitud</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <div class="label">Resultado del envío</div>
+    <h1>Resumen de la solicitud</h1>
+    <p class="muted">Estos son los datos recibidos. La solicitud no se ha guardado.</p>
+  </header>
+
+  <section class="card">
+    <!-- th:text escapa el html, no se usa th:utext con datos recibidos -->
+    <dl class="result-list">
+      <dt>Nombre</dt>
+      <dd th:text="${solicitud.nombre}">Nombre</dd>
+
+      <dt>Correo</dt>
+      <dd th:text="${solicitud.email}">correo@example.com</dd>
+
+      <dt>Material</dt>
+      <dd th:text="${materialSolicitado[1]} + ' (' + ${materialSolicitado[0]} + ')'">Material</dd>
+
+      <dt>Unidades</dt>
+      <dd th:text="${solicitud.unidades}">1</dd>
+
+      <dt>Recogida</dt>
+      <dd th:text="${solicitud.fechaRecogida}">2026-01-01</dd>
+
+      <dt>Devolución</dt>
+      <dd th:text="${solicitud.fechaDevolucion}">2026-01-02</dd>
+
+      <dt>Motivo</dt>
+      <dd><pre th:text="${solicitud.motivo}">Motivo</pre></dd>
+
+      <dt>Normas aceptadas</dt>
+      <dd th:text="${solicitud.normas ? 'Sí' : 'No'}">Sí</dd>
+
+      <dt>Días del préstamo</dt>
+      <dd th:text="${dias}">1</dd>
+
+      <dt>Total días-unidad</dt>
+      <dd th:text="${diasUnidad}">1</dd>
+    </dl>
+
+    <!-- Condición según la duración del préstamo -->
+    <p class="callout" th:if="${dias == 1}">Se trata de un préstamo de un solo día.</p>
+    <p class="callout" th:unless="${dias == 1}"
+       th:text="'Se trata de un préstamo de ' + ${dias} + ' días.'">Préstamo de varios días.</p>
+
+    <div class="actions">
+      <a class="button" th:href="@{/}">Volver al catálogo</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

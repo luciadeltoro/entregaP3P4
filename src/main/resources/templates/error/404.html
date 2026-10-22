@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<!-- Spring Boot elige esta plantilla para las respuestas HTTP 404. -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página no encontrada · 404</title>
+  <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="page">
+  <section class="card error-card">
+    <p class="status">HTTP <span th:text="${status}">404</span></p>
+    <h1>No encontramos esa página</h1>
+    <p>La dirección solicitada no corresponde a una página disponible.</p>
+    <!-- ErrorAttributes expone la ruta; th:text la representa escapada. -->
+    <p class="muted">Ruta: <code th:text="${path}">/ruta</code></p>
+    <div class="actions">
+      <a class="button" th:href="@{/}">Volver al inicio</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

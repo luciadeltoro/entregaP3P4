@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!-- Plantilla de respaldo para los errores HTTP 4xx distintos del 404. -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Error de petición</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="page">
+    <section class="card error-card">
+        <div class="label">Página de error personalizada · cliente</div>
+        <p class="status">HTTP <span th:text="${status}">400</span></p>
+        <h1>La petición no se pudo completar</h1>
+        <p>Comprueba la dirección o los datos enviados y vuelve a intentarlo.</p>
+        <!-- Se muestra solo el estado y la ruta, no mensajes internos de excepción. -->
+        <p class="muted">Ruta: <code th:text="${path}">/ruta</code></p>
+        <div class="actions">
+            <a class="button" th:href="@{/}">Volver al inicio</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

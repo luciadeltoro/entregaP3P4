@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- Ficha: código por variable de ruta, turno por parámetro de consulta -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ficha del material</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="page">
+    <section class="card">
+        <div class="label">Ficha del material</div>
+        <!--th:text escapa los datos antes de mostrarlos -->
+        <h1 th:text="${material[1]}">Nombre</h1>
+        <p><strong>Código:</strong> <span th:text="${material[0]}">CODIGO</span></p>
+        <p><strong>Descripción:</strong> <span th:text="${material[2]}">Descripción</span></p>
+        <p><strong>Turno:</strong> <span th:text="${turno}">general</span></p>
+        <div class="actions">
+            <a class="button" th:href="@{/solicitud/nueva}">Solicitar préstamo</a>
+            <a class="button secondary" th:href="@{/}">Volver al catálogo</a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

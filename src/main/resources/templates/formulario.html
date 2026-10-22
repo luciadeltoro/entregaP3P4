@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!-- Formulario enlazado al DTO con th:object y th:field -->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Solicitud de préstamo</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="page">
+    <header class="hero">
+        <div class="label">Aula maker</div>
+        <h1>Solicitud de préstamo</h1>
+    </header>
+
+    <section class="card">
+        <!-- novalidate permite comprobar la validación del servidor sin que el navegador la bloquee -->
+        <form th:action="@{/solicitudes}" th:object="${solicitud}" method="post" novalidate>
+            <div class="form-grid">
+                <div class="field">
+                    <label for="nombre">Nombre de quien solicita</label>
+                    <input type="text" id="nombre" th:field="*{nombre}"
+                           required maxlength="60" th:errorclass="field-error">
+                    <p class="error" th:errors="*{nombre}"></p>
+                </div>
+
+                <div class="field">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" th:field="*{email}"
+                           required maxlength="120" th:errorclass="field-error">
+                    <p class="error" th:errors="*{email}"></p>
+                </div>
+
+                <div class="field">
+                    <label for="material">Material solicitado</label>
+                    <!-- Opciones generadas desde el array, th:field marca la opción enviada -->
+                    <select id="material" th:field="*{material}" required th:errorclass="field-error">
+                        <option value="">Selecciona un material</option>
+                        <option th:each="m : ${materiales}"
+                                th:value="${m[0]}" th:text="${m[1]}">Material</option>
+                    </select>
+                    <p class="error" th:errors="*{material}"></p>
+                </div>
+
+                <div class="field">
+                    <label for="unidades">Unidades (1 a 3)</label>
+                    <input type="number" id="unidades" th:field="*{unidades}"
+                           required min="1" max="3" th:errorclass="field-error">
+                    <p class="error" th:errors="*{unidades}"></p>
+                </div>
+
+                <div class="field">
+                    <label for="fechaRecogida">Fecha de recogida</label>
+                    <input type="date" id="fechaRecogida" th:field="*{fechaRecogida}"
+                           required th:errorclass="field-error">
+                    <p class="error" th:errors="*{fechaRecogida}"></p>
+                </div>
+
+                <div class="field">
+                    <label for="fechaDevolucion">Fecha de devolución</label>
+                    <input type="date" id="fechaDevolucion" th:field="*{fechaDevolucion}"
+                           required th:errorclass="field-error">
+                    <p class="error" th:errors="*{fechaDevolucion}"></p>
+                </div>
+
+                <div class="field full">
+                    <label for="motivo">Motivo del préstamo (30 a 400 caracteres)</label>
+                    <textarea id="motivo" th:field="*{motivo}" required
+                              minlength="30" maxlength="400" th:errorclass="field-error"></textarea>
+                    <p class="error" th:errors="*{motivo}"></p>
+                </div>
+
+                <div class="field full">
+                    <label class="check" for="normas">
+                        <!-- th:field genera también el campo oculto auxiliar del checkbox -->
+                        <input type="checkbox" id="normas" th:field="*{normas}">
+                        <span>Acepto las normas del aula maker.</span>
+                    </label>
+                    <p class="error" th:errors="*{normas}"></p>
+                </div>
+            </div>
+
+            <div class="actions">
+                <button type="submit">Enviar solicitud</button>
+                <a class="button secondary" th:href="@{/}">Volver al catálogo</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

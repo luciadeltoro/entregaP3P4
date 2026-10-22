@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- Catálogo: recorre el array String[][] que entrega el controlador-->
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Catálogo del aula maker</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<main class="page">
+    <header class="hero">
+        <div class="label">Aula maker</div>
+        <h1>Catálogo de materiales</h1>
+    </header>
+
+    <div class="grid">
+        <!-- Cada m es una fila del array -->
+        <section class="card" th:each="m : ${materiales}">
+            <h2 th:text="${m[1]}">Nombre</h2>
+            <p th:text="${m[2]}">Descripción</p>
+            <div class="actions">
+                <!-- La url se genera con @{} y el código se inserta como variable de ruta -->
+                <a class="button" th:href="@{/materiales/{codigo}(codigo=${m[0]})}">Ver ficha</a>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>
